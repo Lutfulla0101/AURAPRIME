@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA PRIME - Enterprise Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Glow Orbs -->
+  <div class="bg-glow-orb orb-1"></div>
+  <div class="bg-glow-orb orb-2"></div>
+  <div class="bg-glow-orb orb-3"></div>
+
+  <!-- Main Container -->
+  <div class="app-wrapper">
+    <!-- Premium Header / Navbar -->
+    <header class="glass-navbar">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <div class="brand-text">
+          <span class="logo-title">AURA<span>PRIME</span></span>
+          <span class="logo-subtitle">PRO MANAGEMENT CLOUD</span>
+        </div>
+      </div>
+
+      <!-- Center Controls: Theme & Language (Stored in Cookie 1 Hour) -->
+      <div class="preference-controls">
+        <div class="control-pill" title="Cookie: 1 soat saqlanadi">
+          <i class="fa-solid fa-globe"></i>
+          <select id="langSelect" class="lang-dropdown">
+            <option value="uz">🇺🇿 O'zbek</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="ru">🇷🇺 Русский</option>
+          </select>
+        </div>
+
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Mavzu (Cookie: 1 soat saqlanadi)">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+      </div>
+
+      <!-- Auth State Menu -->
+      <div class="user-menu-area">
+        <div id="loggedOutNav" class="nav-buttons">
+          <button class="btn btn-outline" id="navLoginBtn">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span data-i18n="login">Kirish</span>
+          </button>
+          <button class="btn btn-primary" id="navRegisterBtn">
+            <i class="fa-solid fa-user-plus"></i>
+            <span data-i18n="register">Ro'yxatdan o'tish</span>
+          </button>
+        </div>
+
+        <div id="loggedInNav" class="nav-user-profile hidden">
+          <div class="user-chip">
+            <div class="avatar-badge" id="userAvatar">U</div>
+            <div class="user-meta">
+              <span class="user-name" id="navUsername">User</span>
+              <span class="user-badge" data-i18n="proMember">VIP Member</span>
+            </div>
+          </div>
+          <button class="btn btn-danger-soft" id="logoutBtn" title="Chiqish">
+            <i class="fa-solid fa-power-off"></i>
+            <span data-i18n="logout">Chiqish</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Content -->
+    <main class="main-content">
+      <!-- HERO BANNER -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="hero-chip">
+            <span class="pulse-dot"></span>
+            <span data-i18n="heroBadge">Node.js + Express + JWT + Cookie & Session Architecture</span>
+          </div>
+          <h1 class="hero-heading" data-i18n="heroTitle">
+            Kreativ Loyihalar & <span class="gradient-text">Premium Boshqaruv</span> Tizimi
+          </h1>
+          <p class="hero-desc" data-i18n="heroSubtitle">
+            Xavfsiz JWT autentifikatsiya, 1 soatlik cookie-lar (Til & Mavzu) va avtomatik loginni eslab qoluvchi Session mexanizmi.
+          </p>
+        </div>
+
+        <!-- Live Status Bar -->
+        <div class="tech-metrics-bar">
+          <div class="metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-cookie-bite"></i></div>
+            <div class="metric-info">
+              <span class="metric-name">Cookie Holati (1 soat)</span>
+              <span class="metric-val" id="cookieStatusInfo">Theme: dark | Lang: uz</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="metric-info">
+              <span class="metric-name">Session Eslab qolgan Login</span>
+              <span class="metric-val" id="sessionStatusInfo">Yo'q</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="metric-info">
+              <span class="metric-name">JWT Token</span>
+              <span class="metric-val" id="jwtStatusInfo">Faol emas</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD / CRUD SECTION -->
+      <section class="crud-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <i class="fa-solid fa-layer-group"></i>
+              <span data-i18n="crudTitle">Loyihalar & Xizmatlar Katalogi</span>
+            </h2>
+            <p class="section-subtitle" data-i18n="crudSubtitle">To'liq Create, Read, Update, Delete amallari JWT himoyasida</p>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-primary" id="openCreateModalBtn">
+              <i class="fa-solid fa-plus"></i>
+              <span data-i18n="createBtn">Yangi Qo'shish</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="glass-toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Qidiruv (nomi, tavsifi)..." />
+          </div>
+          <div class="filter-group">
+            <select id="categoryFilter" class="glass-select">
+              <option value="all">Barcha toifalar</option>
+              <option value="Design">Design</option>
+              <option value="Backend">Backend</option>
+              <option value="DevOps">DevOps</option>
+              <option value="Mobile">Mobile</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="items-grid" id="itemsContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-footer">
+      <div class="footer-left">
+        <span>© 2026 <strong>Aura Prime</strong>. Barcha huquqlar himoyalangan.</span>
+      </div>
+      <div class="footer-badges">
+        <span class="badge-tech"><i class="fa-brands fa-node-js"></i> Node.js</span>
+        <span class="badge-tech"><i class="fa-solid fa-key"></i> JWT Auth</span>
+        <span class="badge-tech"><i class="fa-solid fa-database"></i> Session & Cookie</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- AUTH MODAL (Login & Register with Session auto-fill) -->
+  <div class="modal-overlay" id="authModal">
+    <div class="glass-modal auth-modal-box">
+      <button class="modal-close-btn" id="closeAuthModal">&times;</button>
+      
+      <!-- Modal Tabs -->
+      <div class="modal-tabs">
+        <button class="tab-btn active" id="tabLogin" data-target="loginForm">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span data-i18n="login">Kirish</span>
+        </button>
+        <button class="tab-btn" id="tabRegister" data-target="registerForm">
+          <i class="fa-solid fa-user-plus"></i>
+          <span data-i18n="register">Ro'yxatdan o'tish</span>
+        </button>
+      </div>
+
+      <!-- Notice Alert about Session -->
+      <div class="session-notice" id="sessionNotice" style="display: none;">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Session: Sizning oxirgi loginingiz avtomatik joylashtirildi!</span>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="auth-form active">
+        <div class="form-group">
+          <label>
+            <i class="fa-solid fa-user"></i>
+            <span data-i18n="usernameLabel">Foydalanuvchi nomi / Email</span>
+          </label>
+          <input type="text" id="loginUsername" required placeholder="Login yoki email" autocomplete="username">
+          <span class="field-hint" id="rememberedHint"></span>
+        </div>
+        <div class="form-group">
+          <label>
+            <i class="fa-solid fa-lock"></i>
+            <span data-i18n="passwordLabel">Maxfiy parol</span>
+          </label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-large">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span data-i18n="submitLogin">Tizimga Kirish</span>
+        </button>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" class="auth-form">
+        <div class="form-group">
+          <label>
+            <i class="fa-solid fa-user"></i>
+            <span data-i18n="regUsername">Login tanlang</span>
+          </label>
+          <input type="text" id="regUsername" required placeholder="Masalan: alisher99">
+        </div>
+        <div class="form-group">
+          <label>
+            <i class="fa-solid fa-envelope"></i>
+            <span data-i18n="regEmail">Elektron pochta</span>
+          </label>
+          <input type="email" id="regEmail" required placeholder="nom@example.com">
+        </div>
+        <div class="form-group">
+          <label>
+            <i class="fa-solid fa-lock"></i>
+            <span data-i18n="regPassword">Parol yarating</span>
+          </label>
+          <input type="password" id="regPassword" required placeholder="Eng kamida 6 ta belgi">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-large">
+          <i class="fa-solid fa-sparkles"></i>
+          <span data-i18n="submitRegister">Ro'yxatdan O'tish</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CRUD CREATE / EDIT MODAL -->
+  <div class="modal-overlay" id="crudModal">
+    <div class="glass-modal crud-modal-box">
+      <button class="modal-close-btn" id="closeCrudModal">&times;</button>
+      <div class="modal-header">
+        <div class="icon-circle"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <div>
+          <h3 id="crudModalTitle" class="modal-title">Yangi Element Qo'shish</h3>
+          <p class="modal-desc">Katalogga yangi premium karta ma'lumotlarini kiriting</p>
+        </div>
+      </div>
+
+      <form id="crudForm">
+        <input type="hidden" id="crudItemId">
+        <div class="form-group">
+          <label><i class="fa-solid fa-heading"></i> Sarlavha / Nomi</label>
+          <input type="text" id="crudTitle" required placeholder="Masalan: AI Analytics Dashboard">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fa-solid fa-tags"></i> Kategoriya</label>
+            <select id="crudCategory" class="glass-select">
+              <option value="Design">Design</option>
+              <option value="Backend">Backend</option>
+              <option value="DevOps">DevOps</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-signal"></i> Status</label>
+            <select id="crudStatus" class="glass-select">
+              <option value="Active">Active</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-dollar-sign"></i> Narxi / Qiymati</label>
+          <input type="text" id="crudPrice" placeholder="$299">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-align-left"></i> Tavsif</label>
+          <textarea id="crudDescription" rows="3" placeholder="Qisqacha tavsif yozing..."></textarea>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="button" class="btn btn-outline" id="cancelCrudBtn">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" id="saveCrudBtn">
+            <i class="fa-solid fa-floppy-disk"></i> Saqlash
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

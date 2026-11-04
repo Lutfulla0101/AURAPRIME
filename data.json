@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 1793770552787,
+      "username": "admin",
+      "email": "lutfulla268@gmail.com",
+      "password": "$2a$10$sWpeekSJ5GND6JSMLh7uz.S74NZZQr0VhttGVGvwBRIe4M9LXi4km",
+      "createdAt": "2026-11-04T05:35:52.787Z"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "title": "Premium Dashboard UI",
+      "category": "Design",
+      "status": "Active",
+      "price": "$240",
+      "description": "Ultra-modern glassmorphic interface with reactive stats.",
+      "createdAt": "2026-11-04T05:34:00.330Z"
+    },
+    {
+      "id": 2,
+      "title": "Secure API Gateway",
+      "category": "Backend",
+      "status": "Completed",
+      "price": "$499",
+      "description": "JWT authentication, rate limiting and microservices architecture.",
+      "createdAt": "2026-11-04T05:34:00.331Z"
+    },
+    {
+      "id": 3,
+      "title": "Cloud Database Sync",
+      "category": "DevOps",
+      "status": "Pending",
+      "price": "$180",
+      "description": "Real-time multi-region replication and failover handling.",
+      "createdAt": "2026-11-04T05:34:00.331Z"
+    }
+  ]
+}
